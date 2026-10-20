@@ -32,6 +32,8 @@ import {ProductListComponent} from './components/product-list/product-list.compo
 import {ProductPageComponent} from './components/product-page/product-page.component';
 import {ProductsPageComponent} from './components/products-page/products-page.component';
 import {TopBarComponent} from './components/top-bar/top-bar.component';
+import {LeadFormComponent} from './components/lead-form/lead-form.component';
+import {LeadConfirmationComponent} from './components/lead-confirmation/lead-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import {TopBarComponent} from './components/top-bar/top-bar.component';
     TagSettingsComponent,
     LoginFormComponent,
     EventStreamComponent,
+    LeadFormComponent,
+    LeadConfirmationComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,99 @@
+<!--
+ Copyright 2024 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<div class="confirmation-container">
+  <div class="status-banner" *ngIf="currentLead">
+    <div class="success-icon">✓</div>
+    <div>
+      <h3>Lead Captured Successfully!</h3>
+      <p>
+        The <code>generate_lead</code> event was pushed to <code>dataLayer</code> with normalized <code>user_data</code>.
+      </p>
+    </div>
+  </div>
+
+  <div class="actions-bar">
+    <button class="btn btn-primary" (click)="downloadCsv()" [disabled]="storedLeads.length === 0">
+      📥 Download Google Ads Offline Conversion CSV ({{ storedLeads.length }})
+    </button>
+    <button class="btn btn-secondary" (click)="submitNewLead()">
+      + Submit Another Lead
+    </button>
+    <button class="btn btn-outline-danger" (click)="clearLeads()" *ngIf="storedLeads.length > 0">
+      Clear Saved Leads
+    </button>
+  </div>
+
+  <div class="details-grid" *ngIf="currentLead">
+    <div class="card details-card">
+      <div class="card-header">Submitted Lead Details</div>
+      <div class="card-body">
+        <div class="detail-row"><span class="label">Lead ID:</span> <span class="val mono">{{ currentLead.lead_id }}</span></div>
+        <div class="detail-row"><span class="label">Name:</span> <span class="val">{{ currentLead.address.first_name }} {{ currentLead.address.last_name }}</span></div>
+        <div class="detail-row"><span class="label">Email:</span> <span class="val mono">{{ currentLead.email }}</span></div>
+        <div class="detail-row"><span class="label">Phone:</span> <span class="val mono">{{ currentLead.phone_number }}</span></div>
+        <div class="detail-row" *ngIf="currentLead.company"><span class="label">Company:</span> <span class="val">{{ currentLead.company }}</span></div>
+        <div class="detail-row"><span class="label">Address:</span> <span class="val">{{ currentLead.address.street }}, {{ currentLead.address.city }}, {{ currentLead.address.region }} {{ currentLead.address.postal_code }}, {{ currentLead.address.country }}</span></div>
+        <div class="detail-row"><span class="label">Inquiry:</span> <span class="val">{{ currentLead.inquiry_type }}</span></div>
+        <div class="detail-row"><span class="label">Est. Value:</span> <span class="val">${{ currentLead.estimated_value }} {{ currentLead.currency }}</span></div>
+      </div>
+    </div>
+
+    <div class="card code-card">
+      <div class="card-header">dataLayer.push Payload</div>
+      <div class="card-body code-body">
+        <pre><code>{{ dataLayerSnippet }}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card crm-card" *ngIf="storedLeads.length > 0">
+    <div class="card-header">
+      <span>Mini-CRM: Captured Leads History (Ready for Offline Upload)</span>
+      <span class="badge">{{ storedLeads.length }} Leads</span>
+    </div>
+    <div class="card-body table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Time (UTC)</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Location</th>
+            <th>Value</th>
+            <th>Lead ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let l of storedLeads">
+            <td>{{ l.created_at | date:'short' }}</td>
+            <td>{{ l.address.first_name }} {{ l.address.last_name }}</td>
+            <td class="mono">{{ l.email }}</td>
+            <td class="mono">{{ l.phone_number }}</td>
+            <td>{{ l.address.city }}, {{ l.address.country }}</td>
+            <td>${{ l.estimated_value }}</td>
+            <td class="mono small-id">{{ l.lead_id }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="no-leads" *ngIf="storedLeads.length === 0">
+    <p>No leads captured yet.</p>
+    <button class="btn btn-primary" (click)="submitNewLead()">Submit a Test Lead</button>
+  </div>
+</div>

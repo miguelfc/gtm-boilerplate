@@ -14,6 +14,20 @@ If the solution is to be used with Google Tag Manager, a web container needs to
 be set up in advance of the deployment. After setting this up, make a note of
 the web container ID. This is used with the deployment.
 
+## Enhanced Conversions for Leads (ECL)
+
+The site includes a dedicated lead generation workflow at `/contact` (or `/lead`) designed to test **Google Ads Enhanced Conversions for Leads (ECL)**:
+
+1. **Lead Capture Form**:
+   - Collects first-party customer information: Email, Phone Number, First Name, Last Name, Street Address, City, Region, Postal Code, Country, and Lead Value.
+   - Includes 1-click test persona autofill buttons (`Jane Doe (US)`, `Oliver Smith (UK)`, `Carlos Silva (BR)`).
+2. **Online Event Emission**:
+   - On submission, pushes a `generate_lead` event to `dataLayer` with normalized First-Party User Data (`user_data` object) and `lead_id`.
+   - Fires the Google Ads Lead Conversion Tag configured in `web-container.json` using the `User Provided Data - Leads` (`awec`) variable.
+3. **Offline Conversion Testing & Mini-CRM**:
+   - The confirmation page (`/lead-confirmation`) retains captured leads in local storage and provides a 1-click button to **Download Google Ads Offline Conversion CSV**.
+   - The CSV is formatted strictly to Google Ads Enhanced Conversions for Leads specifications (`Email,Phone Number,First Name,Last Name,Country Code,Postal Code,Conversion Name,Conversion Time,Conversion Value,Conversion Currency,Order ID`) for direct upload into the Google Ads UI or Data Manager.
+
 ## Currency
 
 By default, the project uses `GBP` as the currency. You can override this by
