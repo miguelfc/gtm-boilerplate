@@ -44,7 +44,7 @@
         "containerId": "22222222",
         "tagId": "1",
         "name": "Conversion Linker",
-        "type": "sgtmcvl",
+        "type": "sgtmadscl",
         "parameter": [
           {
             "type": "BOOLEAN",
@@ -63,11 +63,26 @@
         "containerId": "22222222",
         "tagId": "2",
         "name": "Google Analytics 4",
-        "type": "gaawes",
+        "type": "sgtmgaaw",
         "parameter": [
           {
             "type": "BOOLEAN",
-            "key": "sendEventParameters",
+            "key": "redactVisitorIp",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "epToIncludeDropdown",
+            "value": "all"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "upToIncludeDropdown",
+            "value": "all"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enableEuid",
             "value": "true"
           }
         ],
