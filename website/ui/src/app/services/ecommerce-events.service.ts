@@ -694,12 +694,25 @@ export class EcommerceEventsService {
    */
   sendGenerateLeadEvent(lead: Lead): void {
     this.pushToDataLayer({ ecommerce: null });
-    const event: GenerateLeadEvent = {
+    const event: any = {
       event: 'generate_lead',
       lead_id: lead.lead_id,
       value: lead.estimated_value,
       currency: lead.currency || 'USD',
       user_data: {
+        email: lead.email,
+        phone_number: lead.phone_number,
+        address: {
+          first_name: lead.address.first_name,
+          last_name: lead.address.last_name,
+          street: lead.address.street,
+          city: lead.address.city,
+          region: lead.address.region,
+          postal_code: lead.address.postal_code,
+          country: lead.address.country,
+        },
+      },
+      user: {
         email: lead.email,
         phone_number: lead.phone_number,
         address: {
