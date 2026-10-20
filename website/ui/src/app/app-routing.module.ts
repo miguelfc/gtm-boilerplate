@@ -23,6 +23,8 @@ import {ConfirmationPageComponent} from './components/confirmation-page/confirma
 import {HomePageComponent} from './components/home-page/home-page.component';
 import {ProductPageComponent} from './components/product-page/product-page.component';
 import {ProductsPageComponent} from './components/products-page/products-page.component';
+import {LeadFormComponent} from './components/lead-form/lead-form.component';
+import {LeadConfirmationComponent} from './components/lead-confirmation/lead-confirmation.component';
 
 const storeNameSuffix = '| Demo E-commerce Store';
 const routes: Routes = [
@@ -50,6 +52,21 @@ const routes: Routes = [
     path: 'thank-you',
     component: ConfirmationPageComponent,
     title: `Thank you ${storeNameSuffix}`,
+  },
+  {
+    path: 'contact',
+    component: LeadFormComponent,
+    title: `Contact & Request Quote ${storeNameSuffix}`,
+  },
+  {
+    path: 'lead',
+    redirectTo: 'contact',
+    pathMatch: 'full',
+  },
+  {
+    path: 'lead-confirmation',
+    component: LeadConfirmationComponent,
+    title: `Lead Confirmation ${storeNameSuffix}`,
   },
 ];
 

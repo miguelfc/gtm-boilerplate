@@ -36,6 +36,7 @@ import {
   AddShippingInfo,
   AddPaymentInfo,
 } from '../models/ecommerce-events';
+import { Lead, GenerateLeadEvent } from '../models/lead';
 import { Basket, Product, ProductVariant, Products } from '../models/products';
 import { ProductsService } from './products.service';
 import { isNgTemplate } from '@angular/compiler';
@@ -688,11 +689,40 @@ export class EcommerceEventsService {
   }
 
   /**
+   * Send the generate_lead event with user_data to GTM.
+   * @param lead The lead information captured from the form.
+   */
+  sendGenerateLeadEvent(lead: Lead): void {
+    this.pushToDataLayer({ ecommerce: null });
+    const event: GenerateLeadEvent = {
+      event: 'generate_lead',
+      lead_id: lead.lead_id,
+      value: lead.estimated_value,
+      currency: lead.currency || 'USD',
+      user_data: {
+        email: lead.email,
+        phone_number: lead.phone_number,
+        address: {
+          first_name: lead.address.first_name,
+          last_name: lead.address.last_name,
+          street: lead.address.street,
+          city: lead.address.city,
+          region: lead.address.region,
+          postal_code: lead.address.postal_code,
+          country: lead.address.country,
+        },
+      },
+    };
+    this.pushToDataLayer(event);
+    this.events.unshift(this.formatEcommerceEventAsString(event));
+  }
+
+  /**
    * Format a given EcommerceEvent as a string.
    * @param event the event to format.
    * @return the event as a string.
    */
-  private formatEcommerceEventAsString(event: EcommerceEvent): string {
+  private formatEcommerceEventAsString(event: any): string {
     const eventJson = JSON.stringify(event);
     const options = {
       indent_size: 2,
