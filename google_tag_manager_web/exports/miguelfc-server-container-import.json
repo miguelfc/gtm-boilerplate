@@ -18,24 +18,43 @@
     "client": [
       {
         "accountId": "1234567890",
-        "containerId": "22222222",
+        "containerId": "11111111",
         "clientId": "1",
-        "name": "GA4 Client",
-        "type": "ga4",
+        "name": "GA4",
+        "type": "gaaw_client",
         "parameter": [
           {
-            "type": "BOOLEAN",
-            "key": "cookieValueCompressed",
-            "value": "true"
+            "type": "TEMPLATE",
+            "key": "cookieDomain",
+            "value": "auto"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "cookieMaxAgeInSec",
+            "value": "63072000"
           },
           {
             "type": "BOOLEAN",
-            "key": "enableDefaultPath",
+            "key": "activateDefaultPaths",
             "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "cookiePath",
+            "value": "/"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "cookieManagement",
+            "value": "server"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "cookieName",
+            "value": "FPID"
           }
         ],
-        "fingerprint": "0",
-        "priority": 0
+        "fingerprint": "0"
       }
     ],
     "tag": [
