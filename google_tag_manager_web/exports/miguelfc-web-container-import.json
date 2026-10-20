@@ -834,17 +834,17 @@
           },
           {
             "type": "TEMPLATE",
-            "key": "phone",
+            "key": "phone_number",
             "value": "{{User - Phone}}"
           },
           {
             "type": "TEMPLATE",
-            "key": "firstName",
+            "key": "first_name",
             "value": "{{User - First Name}}"
           },
           {
             "type": "TEMPLATE",
-            "key": "lastName",
+            "key": "last_name",
             "value": "{{User - Last Name}}"
           },
           {
@@ -864,7 +864,7 @@
           },
           {
             "type": "TEMPLATE",
-            "key": "postalCode",
+            "key": "postal_code",
             "value": "{{User - Postal Code}}"
           },
           {
