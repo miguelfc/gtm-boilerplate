@@ -1,0 +1,367 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2026-10-20 13:30:00",
+  "containerVersion": {
+    "path": "accounts/1234567890/containers/22222222/versions/0",
+    "accountId": "1234567890",
+    "containerId": "22222222",
+    "container": {
+      "path": "accounts/1234567890/containers/22222222",
+      "accountId": "1234567890",
+      "containerId": "22222222",
+      "name": "miguelfc-server-container",
+      "publicId": "GTM-PSZGX6L7",
+      "usageContext": [
+        "SERVER"
+      ]
+    },
+    "client": [
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "clientId": "1",
+        "name": "GA4 Client",
+        "type": "ga4",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "cookieValueCompressed",
+            "value": "true"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enableDefaultPath",
+            "value": "true"
+          }
+        ],
+        "fingerprint": "0",
+        "priority": 0
+      }
+    ],
+    "tag": [
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "tagId": "1",
+        "name": "Conversion Linker",
+        "type": "sgtmcvl",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "enableCookieOverrides",
+            "value": "false"
+          }
+        ],
+        "fingerprint": "0",
+        "firingTriggerId": [
+          "10"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "tagId": "2",
+        "name": "Google Analytics 4",
+        "type": "gaawes",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "sendEventParameters",
+            "value": "true"
+          }
+        ],
+        "fingerprint": "0",
+        "firingTriggerId": [
+          "10"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "tagId": "3",
+        "name": "Google Ads - Purchase (Server-Side)",
+        "type": "sgtmadsct",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "conversionId",
+            "value": "{{Google Ads Conversion ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "conversionLabel",
+            "value": "{{Google Ads Purchase Label}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "orderId",
+            "value": "{{Transaction ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "conversionValue",
+            "value": "{{Transaction Value}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "currencyCode",
+            "value": "{{Currency}}"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enableEnhancedMatch",
+            "value": "true"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enableConversionLinker",
+            "value": "true"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "rdp",
+            "value": "false"
+          }
+        ],
+        "fingerprint": "0",
+        "firingTriggerId": [
+          "20"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "tagId": "4",
+        "name": "Google Ads - Submit Lead Form ECL (Server-Side)",
+        "type": "sgtmadsct",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "conversionId",
+            "value": "{{Google Ads Conversion ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "conversionLabel",
+            "value": "{{Google Ads Lead Label}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "orderId",
+            "value": "{{Lead ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "conversionValue",
+            "value": "{{Transaction Value}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "currencyCode",
+            "value": "{{Currency}}"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enableEnhancedMatch",
+            "value": "true"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enableConversionLinker",
+            "value": "true"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "rdp",
+            "value": "false"
+          }
+        ],
+        "fingerprint": "0",
+        "firingTriggerId": [
+          "30"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "triggerId": "10",
+        "name": "All GA4 Events",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": ".*"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "0"
+      },
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "triggerId": "20",
+        "name": "Event - purchase",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "purchase"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "0"
+      },
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "triggerId": "30",
+        "name": "Event - generate_lead",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "generate_lead"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "0"
+      }
+    ],
+    "variable": [
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "variableId": "201",
+        "name": "Google Ads Conversion ID",
+        "type": "c",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "value",
+            "value": "820386358"
+          }
+        ]
+      },
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "variableId": "202",
+        "name": "Google Ads Purchase Label",
+        "type": "c",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "value",
+            "value": "5JsVCN6vxekcELa0mIcD"
+          }
+        ]
+      },
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "variableId": "203",
+        "name": "Google Ads Lead Label",
+        "type": "c",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "value",
+            "value": "YOUR_LEAD_LABEL"
+          }
+        ]
+      },
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "variableId": "204",
+        "name": "Transaction ID",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "transaction_id"
+          }
+        ]
+      },
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "variableId": "205",
+        "name": "Transaction Value",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "value"
+          }
+        ]
+      },
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "variableId": "206",
+        "name": "Currency",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "currency"
+          }
+        ]
+      },
+      {
+        "accountId": "1234567890",
+        "containerId": "22222222",
+        "variableId": "207",
+        "name": "Lead ID",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "lead_id"
+          }
+        ]
+      }
+    ]
+  }
+}
