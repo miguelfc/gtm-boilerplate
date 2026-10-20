@@ -594,7 +594,7 @@
           },
           {
             "type": "TEMPLATE",
-            "key": "codeVariable",
+            "key": "dataSource",
             "value": "{{User Data}}"
           }
         ]
