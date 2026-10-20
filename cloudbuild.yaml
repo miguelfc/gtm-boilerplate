@@ -1,0 +1,54 @@
+# Copyright 2024 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+steps:
+  # 1. Inject custom environment variables and compile Angular production bundle
+  - name: 'node:22'
+    entrypoint: 'bash'
+    dir: 'website/ui'
+    env:
+      - 'GTM_CONTAINER_ID=$_GTM_CONTAINER_ID'
+      - 'GOOGLE_TAG_ID=$_GOOGLE_TAG_ID'
+      - 'SGTM_ENDPOINT_URL=$_SGTM_ENDPOINT_URL'
+      - 'SGTM_TAG_SERVING_URL=$_SGTM_TAG_SERVING_URL'
+      - 'STAPE_TAG_SERVING_URL=$_STAPE_TAG_SERVING_URL'
+      - 'APP_CURRENCY=$_CURRENCY'
+      - 'APP_LOCAL_CODE=$_LOCAL_CODE'
+    args:
+      - '-c'
+      - |
+        node ./scripts/inject-env.js
+        npm ci
+        npm run build
+
+  # 2. Deploy website to Google App Engine
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    dir: 'website'
+    args:
+      - '-c'
+      - |
+        gcloud app deploy app.yaml --project=$PROJECT_ID --quiet
+
+substitutions:
+  _GTM_CONTAINER_ID: 'GTM-XXXXX'
+  _GOOGLE_TAG_ID: 'G-YYYYY'
+  _SGTM_ENDPOINT_URL: 'https://example.com'
+  _SGTM_TAG_SERVING_URL: 'https://www.googletagmanager.com'
+  _STAPE_TAG_SERVING_URL: 'https://example.com'
+  _CURRENCY: 'GBP'
+  _LOCAL_CODE: 'en-GB'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
